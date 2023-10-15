@@ -1,0 +1,2 @@
+*.proto linguist-language=go
+*.yaml linguist-language=go
