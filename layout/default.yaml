@@ -614,10 +614,6 @@ layouts:
           return func(ctx context.Context, c *app.RequestContext) {
             c.SetClientIPFunc(app.ClientIPWithOption(app.ClientIPOptions{
             RemoteIPHeaders: []string{"X-Real-IP", "X-Forwarded-For"},
-              TrustedProxies: map[string]bool{
-                "0.0.0.0":   true,
-                "127.0.0.1": true,
-              },
             }))
             c.Next(ctx)
         }
