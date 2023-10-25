@@ -325,7 +325,7 @@ layouts:
       // SendErrResponse  pack error response
       func SendErrResponse(ctx context.Context, c *app.RequestContext, err error) {
         // todo edit custom code  
-        response := Response{Status: ErrorCodeBiz, Message: err, Data: map[string]string{}}
+        response := Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
         c.JSON(consts.StatusOK, response)
       }
       func SendBizWarnResponse(ctx context.Context, c *app.RequestContext, status int, message string) {
