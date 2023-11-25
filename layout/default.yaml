@@ -608,15 +608,30 @@ layouts:
       import (
         "context"
         "github.com/cloudwego/hertz/pkg/app"
+        "net"
       )
       
       func ClientIp() app.HandlerFunc {
-          return func(ctx context.Context, c *app.RequestContext) {
+           return func(ctx context.Context, c *app.RequestContext) {
+            trustedIp := []*net.IPNet{
+              { // 0.0.0.0/0 (IPv4)
+                IP:   net.IP{0x0, 0x0, 0x0, 0x0},
+                Mask: net.IPMask{0x0, 0x0, 0x0, 0x0},
+              },
+              { // ::/0 (IPv6)
+                IP:   net.IP{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+                Mask: net.IPMask{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+              },
+              { // ::/0 (IPv6)
+                IP: net.ParseIP("127.0.0.1"),
+              },
+            }
             c.SetClientIPFunc(app.ClientIPWithOption(app.ClientIPOptions{
-            RemoteIPHeaders: []string{"X-Real-IP", "X-Forwarded-For"},
+              RemoteIPHeaders: []string{"X-Real-IP", "X-Forwarded-For"},
+              TrustedCIDRs:    trustedIp,
             }))
             c.Next(ctx)
-        }
+          }
       }
    # 配置文件
   - path: conf/test/app.yml
