@@ -237,6 +237,9 @@ layouts:
         "github.com/cloudwego/hertz/pkg/protocol/consts"
         "github.com/flyerxp/lib/logger"
         "github.com/flyerxp/lib/utils/json"
+        "github.com/cloudwego/kitex/pkg/kerrors"
+        "github.com/flyerxp/lib/config"
+        "github.com/flyerxp/lib/logger"
         "path/filepath"
       )
 
@@ -324,7 +327,17 @@ layouts:
 
       // SendErrResponse  pack error response
       func SendErrResponse(ctx context.Context, c *app.RequestContext, err error) {
-        // todo edit custom code  
+        if config.GetConf().Env == "product" {
+          if bizE, ok := kerrors.FromBizStatusError(err); ok {
+            if _, ok = bizE.(kerrors.GRPCStatusIface); ok {
+              logger.AddError(ctx, zap.String("rpcError", err.Error()), zap.Error(err))
+              err = errors.New("Rpc错误")
+            } else if bizE.BizStatusCode() == RpcError {
+              logger.AddError(ctx, zap.String("systemErr", err.Error()), zap.Error(err))
+              err = errors.New("系统错误")
+            }
+          }
+        }
         response := Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
         c.JSON(consts.StatusOK, response)
       }
