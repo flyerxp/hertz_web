@@ -6,9 +6,9 @@
 
 go install github.com/cloudwego/hertz/cmd/hz@latest
 
-hz new --mod=github.com/hertz/hello --proto_path=idl --idl=idl/hello.proto --customize_layout=layout/default.yaml --customize_package=layout/package.yaml
+hz new --mod=github.com/hertz/hello  --idl=idl/hello.proto --customize_layout=layout/default.yaml --customize_package=layout/package.yaml
 
-hz update --mod=github.com/hertz/hello --proto_path=idl --idl=idl/system/module.proto  --customize_package=layout/package.yaml
+hz update --mod=github.com/hertz/hello  --idl=idl/system/module.proto  --customize_package=layout/package.yaml
 
 github.com/jhump/protoreflect v1.14.1 需要这个版本
 
