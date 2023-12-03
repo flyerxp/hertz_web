@@ -233,6 +233,7 @@ layouts:
         "github.com/flyerxp/webrpclib/web"
         "github.com/osteele/liquid"
       	"github.com/cloudwego/hertz/pkg/app"
+        "go.uber.org/zap"
         "os"
         "github.com/cloudwego/hertz/pkg/protocol/consts"
         "github.com/flyerxp/lib/logger"
