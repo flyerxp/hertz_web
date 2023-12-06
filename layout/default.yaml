@@ -718,21 +718,21 @@ layouts:
         char_set: utf8mb4
         max_idle_conns: 10
         max_open_conns: 500
-      nacos:
-        -
-          name: nacosConf
-          url: http://nacosconf:8848/nacos
-          contextPath: /nacos
-          ns: 62c3bcf9-7948-4c26-a353-cebc0a7c9712
-          user: dev
-          pwd: 123456
-          master:
-          redis:
-            name: base
-            address: [ "nacosconfredis:6379" ]
-            user:
-            pwd:
-            master:
+      #nacos:
+      #  -
+      #    name: nacosConf
+      #    url: http://nacosconf:8848/nacos
+      #    contextPath: /nacos
+      #    ns: 62c3bcf9-7948-4c26-a353-cebc0a7c9712
+      #    user: dev
+      #    pwd: 123456
+      #    master:
+      #    redis:
+      #      name: base
+      #      address: [ "nacosconfredis:6379" ]
+      #      user:
+      #      pwd:
+      #      master:
       elastic:
       -
         name: pubEs

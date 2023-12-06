@@ -19,11 +19,13 @@ layouts:
        var req {{$MethodInfo.RequestTypeName}}
        err = c.BindAndValidate(&req)
        if err != nil {
-          utils.RenderErrHtml(ctx, c,  err)
+          //utils.RenderErrHtml(ctx, c,  err)
+          utils.SendErrResponse(ctx, c, err)
           return
        }
        {{end}}       
-       utils.RenderSuccessHtml(ctx, c, "", map[string]any{})
+       //utils.RenderSuccessHtml(ctx, c, "", map[string]any{})
+       utils.SendSuccessResponse(ctx, c, map[string]any{})
       }
       {{end}}
     update_behavior:
