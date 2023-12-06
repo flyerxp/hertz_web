@@ -16,6 +16,8 @@ github.com/apache/thrift v0.13.0 需要这个版本
 
 github.com/cloudwego/netpoll v0.4.1 需要这个版本
 
+http://127.0.0.1:1081/hello
+http://127.0.0.1:1081/ping
 
 设置proto默认路径的方法
 ![2RTTA3XF@STW6GVJJMQ) 3V](https://github.com/flyerxp/hertz_web/assets/52146821/d60a167a-6530-444c-af64-7ea36f742d94)
