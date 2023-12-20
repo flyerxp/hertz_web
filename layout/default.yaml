@@ -290,10 +290,10 @@ layouts:
         }
       }
 
-      const ErrorCodeBiz = 201          //业务错误
-      const ErrorCodeVerification = 202 //校验错误
+      const ErrorCodeBiz = 206          //业务错误
+      const ErrorCodeVerification = 204 //校验错误
       const RpcError = 203              //rpc错误
-      const RpcBizError = 204           //rpc 业务错误
+      const RpcBizError = 202           //rpc 业务错误
       const ErrorTypeBizWaning = "warn"
       const ErrorTypeBizErr = "err"
       
@@ -327,32 +327,23 @@ layouts:
 
 
       // SendErrResponse  pack error response
-      func SendErrResponse(ctx context.Context, c *app.RequestContext, err error) {
+      func SendErrResponse(ctx context.Context, c *app.RequestContext,  code int, message string) {
+        err := errors.New(message)
         if config.GetConf().Env == "product" {
-          if bizE, ok := kerrors.FromBizStatusError(err); ok {
-            if _, ok = bizE.(kerrors.GRPCStatusIface); ok {
-              logger.AddError(ctx, zap.String("rpcError", err.Error()), zap.Error(err))
-              err = errors.New("Rpc错误")
-            } else if bizE.BizStatusCode() == RpcError {
-              logger.AddError(ctx, zap.String("systemErr", err.Error()), zap.Error(err))
-              err = errors.New("系统错误")
-            }
+          if code == RpcError {
+            logger.AddError(ctx, zap.String("systemErr", err.Error()), zap.Error(err))
+            err = errors.New("系统错误")
           }
         }
-        response := Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
-        c.JSON(consts.StatusOK, response)
-      }
-      func SendBizWarnResponse(ctx context.Context, c *app.RequestContext, status int, message string) {
-        // todo edit custom code
-        var err error
-        if status == RpcError {
-          err = errors.New("系统错误")
+        var response Response
+        if code == RpcError {
+          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizErr, err.Error(), map[string]string{}), Data: map[string]string{}}
         } else {
-          err = errors.New(message)
+          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
         }
-        response := Response{Status: status, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
+        //c.SetContentType("application/json;charset:utf-8")
         c.JSON(consts.StatusOK, response)
-      }
+      }     
 
       // SendSuccessResponse  pack success response
       func SendSuccessResponse(ctx context.Context, c *app.RequestContext, data interface{}) {
