@@ -327,21 +327,19 @@ layouts:
 
 
       // SendErrResponse  pack error response
-      func SendErrResponse(ctx context.Context, c *app.RequestContext,  code int, message string) {
-        err := errors.New(message)
+      func SendErrResponse(ctx context.Context, c *app.RequestContext,  code int32, message string) {        
         if config.GetConf().Env == "product" {
           if code == RpcError {
-            logger.AddError(ctx, zap.String("systemErr", err.Error()), zap.Error(err))
-            err = errors.New("系统错误")
+            logger.AddError(ctx, zap.String("systemErr", message))
+            message = "系统错误"
           }
         }
         var response Response
         if code == RpcError {
-          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizErr, err.Error(), map[string]string{}), Data: map[string]string{}}
+          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizErr, message, map[string]string{}), Data: map[string]string{}}
         } else {
-          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, err.Error(), map[string]string{}), Data: map[string]string{}}
+          response = Response{Status: ErrorCodeBiz, Message: GetError(ErrorTypeBizWaning, message, map[string]string{}), Data: map[string]string{}}
         }
-        //c.SetContentType("application/json;charset:utf-8")
         c.JSON(consts.StatusOK, response)
       }     
 
