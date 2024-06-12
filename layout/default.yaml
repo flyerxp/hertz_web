@@ -343,7 +343,9 @@ layouts:
             err = GetError(ErrorTypeBizNormal, bizE.BizMessage(), bizE.BizExtra())
           }
         } else {
-          err = GetError(ErrorTypeBizErr, err.Error(), map[string]string{})
+          if _, ok = err.(Error); !ok {
+            err = GetError(ErrorTypeBizErr, err.Error(), map[string]string{})
+          }
         }
         response := Response{Status: ErrorCodeBiz, Message: err, Data: map[string]string{}}
         c.JSON(consts.StatusOK, response)
