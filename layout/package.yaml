@@ -20,7 +20,7 @@ layouts:
        err = c.BindAndValidate(&req)
        if err != nil {
           //utils.RenderErrHtml(ctx, c,  err)
-          utils.SendErrResponse(ctx, c, utils.RpcBizError,err.Error())
+          utils.SendErrResponse(ctx, c,  err)
           return
        }
        {{end}}       
