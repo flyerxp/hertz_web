@@ -234,6 +234,7 @@ layouts:
         "github.com/osteele/liquid"
       	"github.com/cloudwego/hertz/pkg/app"
         "os"
+        "github.com/cloudwego/hertz/pkg/app/server/render"
         "github.com/cloudwego/hertz/pkg/protocol/consts"
         "github.com/flyerxp/lib/logger"
         "github.com/flyerxp/lib/utils/json"
