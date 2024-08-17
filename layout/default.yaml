@@ -835,3 +835,19 @@ layouts:
     body: |-
       topicinit:  
         - 10101001
+  - path: build.sh
+    delims:
+      - ""
+      - ""
+    body: |-
+      #!/usr/bin/env bash
+      RUN_NAME="hello"
+      git checkout go.mod
+      git pull
+      go mod tidy
+      mkdir -p output/bin output/conf
+      cp script/* output/
+      cp -r conf/* output/conf
+      chmod +x output/bootstrap.sh
+      go build -o output/bin/${RUN_NAME}
+      ##supervisorctl restart hello
