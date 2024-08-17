@@ -228,16 +228,19 @@ layouts:
       package utils
 
       import (
-      	"context"
+        "context"
         "errors"
-        "github.com/flyerxp/webrpclib/web"
-        "github.com/osteele/liquid"
-      	"github.com/cloudwego/hertz/pkg/app"
-        "os"
+        "github.com/cloudwego/hertz/pkg/app"
         "github.com/cloudwego/hertz/pkg/app/server/render"
         "github.com/cloudwego/hertz/pkg/protocol/consts"
+        "github.com/cloudwego/kitex/pkg/kerrors"
+        config2 "github.com/flyerxp/lib/config"
         "github.com/flyerxp/lib/logger"
         "github.com/flyerxp/lib/utils/json"
+        "github.com/flyerxp/webrpclib/web"
+        "github.com/osteele/liquid"
+        "go.uber.org/zap"
+        "os"
         "path/filepath"
       )
 
@@ -297,7 +300,7 @@ layouts:
       const RpcBizError = 204           //rpc 业务错误
       const ErrorTypeBizWaning = "warn"
       const ErrorTypeBizErr = "err"
-      
+      const ErrorTypeBizNormal = "normal"
       type Response struct {
         Status  int   `json:"status"`
         Message error `json:"message"`
