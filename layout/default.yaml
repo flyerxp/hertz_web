@@ -18,11 +18,11 @@ layouts:
         "github.com/cloudwego/hertz/pkg/common/hlog"
         "github.com/cloudwego/hertz/pkg/common/utils"
         "github.com/cloudwego/hertz/pkg/protocol/consts"
-        app2 "github.com/flyerxp/lib/app"
-        conf2 "github.com/flyerxp/lib/config"
-        "github.com/flyerxp/lib/logger"
-        "github.com/flyerxp/lib/utils/netL"
-        "github.com/flyerxp/webrpclib/web"
+        app2 "github.com/flyerxp/lib/v2/app"
+        conf2 "github.com/flyerxp/lib/v2/config"
+        "github.com/flyerxp/lib/v2/logger"
+        "github.com/flyerxp/lib/v2/utils/netL"
+        "github.com/flyerxp/webrpclib/v2/web"
         hertzzap "github.com/hertz-contrib/logger/zap"
         "github.com/hertz-contrib/requestid"
         "{{.GoModule}}/biz/dal"
@@ -191,7 +191,7 @@ layouts:
       
       import (
         "context"
-        "github.com/flyerxp/lib/middleware/mysqlL"
+        "github.com/flyerxp/lib/v2/middleware/mysqlL"
       )
       
       // 定义所有的数据库连接,每个连接一个名字
@@ -211,7 +211,7 @@ layouts:
   
       import (
         "context"
-        "github.com/flyerxp/lib/middleware/redisL"
+        "github.com/flyerxp/lib/v2/middleware/redisL"
       )
       
       var RedisExample *redisL.RedisC
@@ -234,10 +234,10 @@ layouts:
         "github.com/cloudwego/hertz/pkg/app/server/render"
         "github.com/cloudwego/hertz/pkg/protocol/consts"
         "github.com/cloudwego/kitex/pkg/kerrors"
-        config2 "github.com/flyerxp/lib/config"
-        "github.com/flyerxp/lib/logger"
-        "github.com/flyerxp/lib/utils/json"
-        "github.com/flyerxp/webrpclib/web"
+        config2 "github.com/flyerxp/lib/v2/config"
+        "github.com/flyerxp/lib/v2/logger"
+        "github.com/flyerxp/lib/v2/utils/json"
+        "github.com/flyerxp/webrpclib/v2/web"
         "github.com/osteele/liquid"
         "go.uber.org/zap"
         "os"
@@ -453,7 +453,7 @@ layouts:
       import (
         "bytes"
         "fmt"
-        "github.com/flyerxp/lib/utils/json"
+        "github.com/flyerxp/lib/v2/utils/json"
         "github.com/osteele/liquid"
         "github.com/osteele/liquid/render"
         "net/url"
