@@ -188,6 +188,8 @@ layouts:
     delims:
       - "{{"
       - "}}"
+    update_behavior:
+      type: "skip"
     body: |-
       package utils
 
