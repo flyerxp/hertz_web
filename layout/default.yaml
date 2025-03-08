@@ -31,7 +31,7 @@ layouts:
         "gopkg.in/natefinch/lumberjack.v2"
         "net"
         "os"
-        "github.com/flyerxp/web.www/biz/mw"
+        "{{.GoModule}}/biz/mw"
         "time"
       )
       
