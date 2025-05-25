@@ -14,8 +14,6 @@ github.com/jhump/protoreflect v1.14.1 需要这个版本
 
 github.com/apache/thrift v0.13.0 需要这个版本
 
-github.com/cloudwego/netpoll v0.4.1 需要这个版本
-
 http://127.0.0.1:1081/hello
 http://127.0.0.1:1081/ping
 
