@@ -5,7 +5,7 @@ package hello;
 
 option go_package = "hello";
 
-import "api.proto";
+import "project_api.proto";
 
 message HelloReq {
   string Name = 1[(api.query)="name"];
